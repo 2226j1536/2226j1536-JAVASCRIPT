@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing</title>
+    <style>
+        body{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            background-color:  #f0f8ff;;
+            display: flex;
+            justify-content: center;
+            padding-top: 200px;
+        }
+        h1{
+            color:rgb(74, 131, 16);
+        }
+        .div1{
+            text-align:center;
+            background-color: white;
+            border-radius: 8px;
+            width:400px;
+            height:240px;
+            box-shadow:0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        input{
+            padding:10px;
+            border:2px solid rgb(74, 131, 16);
+            border-radius: 3px;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+        button{
+            background-color: rgb(74, 131, 16);
+            border: none;
+            border-radius: 3px;
+            height:40px;
+            width:90px;
+            font-size: 15px;
+        }
+        button:hover{
+            background-color: rgb(46, 84, 15);
+        }
+        #result, #score{
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="div1">
+        <h1>Guess the Number</h1>
+        <input id="guessnumber" placeholder="Enter a Number">
+        <button onclick="checknumber()">Check</button>
+        <p id="result">You are Right/Wrong...</p>
+        <p id="score">Your Score is:0</p>
+    </div>
+    <script>
+        var guessnumber=document.getElementById("guessnumber")
+        var result=document.getElementById("result")
+        var score=document.getElementById("score")
+        var randomnumber=Math.floor(Math.random()*10)+1
+        var totalscore=0;
+        function checknumber(){
+            var enterednumber=guessnumber.value;
+            if(randomnumber==enterednumber){
+                result.textContent="You are Correct!!!"
+                totalscore=totalscore+1;
+                score.textContent="Your Score is:"+totalscore;  
+            }
+            else{
+                result.textContent="You are Wrong!!! Better Luck Next Time...";
+            
+            }
+        }
+    </script>
+</body>
+</html>
