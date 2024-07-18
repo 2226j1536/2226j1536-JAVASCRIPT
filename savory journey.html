@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savory Journey</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        .navbar{
+            background-color: #fd6569;
+            padding:10px;
+        }
+        .container{
+            padding:10px;
+        }
+        .recipe-container{
+            padding:15px;
+            width:25%;
+            background-color: black;
+            border-radius: 10px;
+            color:white;
+            margin:30px;
+            display: inline-block;
+            vertical-align: top;
+        }
+        .recipe-container h2{
+            color:#fd6569;
+        }
+        .recipe-container button{
+            background-color: #fd6569;
+            color:black;
+            border-radius: 10px;
+            padding-top:5px;
+            padding-bottom:5px;
+            padding-left:10px;
+            padding-right:10px;
+            border:none;
+            margin-top:10px;
+
+        }
+        .add-button{
+            background-color: #fd6569;
+            color:black;
+            border-radius: 100%;
+            padding-top:20px;
+            padding-bottom:20px;
+            padding-left:30px;
+            padding-right: 30px;
+            font-size: 40px;
+            border:none;
+            position: fixed;
+            bottom:30px;
+            right:30px;
+        }
+        .popup-overlay{
+            background-color: black;
+            opacity: 0.8;
+            position: absolute;
+            width:100%;
+            height:100%;
+            top:0;
+            left:0;
+            z-index:1;
+            display: none;
+        }
+        .popup-box{
+            background-color: #fd6569;
+            width:40%;
+            padding:40px;
+            border-radius: 10px;
+            position: absolute;
+            top:25%;
+            left:28%;
+            z-index:2;
+            display: none;
+        }
+        .popup-box input{
+            background: transparent;
+            border:none;
+            width:100%;
+            margin-top:15px;
+            margin-left:5px;
+            padding:5px;
+            padding-top: 10px;
+            font-size: 15px;
+            border-bottom: solid black 2px;
+        }
+        .popup-box textarea{
+            background: transparent;
+            width:100%;
+            margin:5px;
+            padding:5px;
+            margin-top: 10px;
+            font-size: 15px;
+            border: solid black 2px;
+        }
+        .popup-box input::placeholder{
+            color:black;
+            font-size: 14px;
+        }
+        .popup-box textarea::placeholder{
+            color:black;
+            font-size: 14px;
+        }
+        .popup-box button{
+            background-color: black;
+            padding-left: 20px;
+            padding-right: 20px;
+            border:none;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            color:white;
+            margin:5px;
+        }
+        .popup-box input:focus{
+            outline: none;
+        }
+        .popup-box textarea:focus{
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="navbar">
+        <h1>Savory Journey</h1>
+    </div>
+    
+    <div class="container">
+        <div class="recipe-container">
+           <h2>Chicken Alfredo Pasta</h2>
+           <h4><i>Ingrediants: </i>broccoli, olive oil, garlic,  cheese, Salt and pepper</h4>
+           <p><i><b>Procedure:  </b></i>reheat oven to 425°F (220°C). Toss broccoli florets with olive oil, minced garlic, salt, and pepper. Spread on a baking sheet and roast for 20-25 minutes. Remove from oven, sprinkle with Parmesan cheese, and toss to coat. Serve warm</p>
+           <button onclick="deleterecipe(event)">Delete</button>
+        </div>
+    </div>
+    <div class="popup-overlay">
+    </div>
+    <div class="popup-box">
+        <h2>Add Recipe</h2>
+        <form>
+            <input type="text" placeholder="Recipe Name" id="recipe-title-input">
+            <input type="text" placeholder="Recipe Ingrediants" id="recipe-ingrediants-input">
+            <textarea placeholder="Recipe Procedure" id="recipe-procedure-input"></textarea>
+            <button id="add-recipe">ADD</button>
+            <button id="cancel-popup">CANCEL</button>
+        </form>
+    </div>
+    <button class="add-button" id="add-popup-button">+</button>
+    <script>
+        var popupoverlay=document.querySelector(".popup-overlay")
+        var popupbox=document.querySelector(".popup-box")
+        var addpopupbutton=document.getElementById("add-popup-button")
+        addpopupbutton.addEventListener("click",function(){
+            popupoverlay.style.display="block"
+            popupbox.style.display="block"
+        })
+        var cancelpopup=document.getElementById("cancel-popup")
+        cancelpopup.addEventListener("click",function(event){
+        event.preventDefault()
+        popupoverlay.style.display="none"
+        popupbox.style.display="none"
+        })  
+        var container=document.querySelector(".container")
+        var addrecipe=document.getElementById("add-recipe")
+        var recipetitleinput=document.getElementById("recipe-title-input")      
+        var recipeingrediantsinput=document.getElementById("recipe-ingrediants-input")      
+        var recipeprocedureinput=document.getElementById("recipe-procedure-input")     
+        
+        addrecipe.addEventListener("click",function(event){
+            event.preventDefault()
+            var div=document.createElement("div")
+            div.setAttribute("class","recipe-container")
+            div.innerHTML=`<h2>${recipetitleinput.value}</h2>
+           <h4><i>Ingrediants: </i>${recipeingrediantsinput.value}</h4>
+           <p><i><b>Procedure:  </b></i>${recipeprocedureinput.value}</p>
+           <button onclick="deleterecipe(event)">Delete</button>`
+            container.append(div)
+            popupoverlay.style.display="none"
+            popupbox.style.display="none"
+        })
+        function deleterecipe(event){
+            event.target.parentElement.remove()
+        }
+        alert("Add Your Own Recipe By clicking The Plus Button!!!")
+    </script>
+</body>
+</html>
